@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MotoHurt – obsługa zwrotów</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- GÓRNY PASEK -->
+  <header class="pasek">
+    <div class="logo">Moto<span>Hurt</span></div>
+    <div class="podtytul">Obsługa zwrotów do hurtowni</div>
+    <nav class="zakladki">
+      <button class="zakladka aktywna" data-widok="widok-zwroty">Zwroty</button>
+      <button class="zakladka" data-widok="widok-bazy">Bazy danych</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===================== ZAKŁADKA: ZWROTY ===================== -->
+    <section id="widok-zwroty" class="widok">
+
+      <div class="karta wyszukiwarka">
+        <h1>Sprawdź zwrot</h1>
+        <p class="pomoc">Wpisz numer zamówienia z paczki – liczbę od <b>1</b> do <b>100</b>, np. <b>1</b>.</p>
+        <form id="formularz">
+          <label>
+            Numer zamówienia
+            <input id="pole-numer" list="lista-numerow" placeholder="np. 1" inputmode="numeric" autocomplete="off" autofocus>
+            <datalist id="lista-numerow"></datalist>
+          </label>
+          <label>
+            Data przyjęcia zwrotu
+            <input id="pole-data" type="date">
+          </label>
+          <button type="submit" class="przycisk glowny">Sprawdź</button>
+        </form>
+        <p id="blad" class="blad" hidden></p>
+      </div>
+
+      <div id="wynik" hidden>
+        <div id="status" class="status"></div>
+
+        <div class="siatka">
+          <div class="karta info"><h2>Kto</h2><div id="info-kto"></div></div>
+          <div class="karta info"><h2>Kiedy</h2><div id="info-kiedy"></div></div>
+          <div class="karta info"><h2>Co i ile</h2><div id="info-co"></div></div>
+          <div class="karta info"><h2>Dokąd (hurtownia)</h2><div id="info-dokad"></div></div>
+        </div>
+
+        <div class="karta akcje">
+          <label>
+            Powód zwrotu
+            <select id="pole-powod">
+              <option>Odstąpienie od umowy przez klienta</option>
+              <option>Niewłaściwa część (nie pasuje do pojazdu)</option>
+              <option>Wada fabryczna</option>
+              <option>Uszkodzenie w transporcie</option>
+              <option>Inny</option>
+            </select>
+          </label>
+          <button id="przycisk-dokument" class="przycisk glowny">Generuj dokument</button>
+          <button id="przycisk-api" class="przycisk">Powiadom hurtownię (API – symulacja)</button>
+        </div>
+
+        <pre id="odpowiedz-api" class="api" hidden></pre>
+
+        <div id="obszar-dokumentu" hidden>
+          <div class="pasek-dokumentu">
+            <span>Podgląd dokumentu</span>
+            <button id="przycisk-drukuj" class="przycisk glowny">Drukuj / zapisz jako PDF</button>
+          </div>
+          <article id="dokument" class="dokument"></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ZAKŁADKA: BAZY DANYCH ===================== -->
+    <section id="widok-bazy" class="widok" hidden>
+      <div class="karta"><h2>Dostawcy (hurtownie)</h2><div class="przewijanie" id="tabela-dostawcy"></div></div>
+      <div class="karta"><h2>Zamówienia</h2><div class="przewijanie" id="tabela-zamowienia"></div></div>
+      <div class="karta"><h2>Klienci</h2><div class="przewijanie" id="tabela-klienci"></div></div>
+      <div class="karta"><h2>Części</h2><div class="przewijanie" id="tabela-czesci"></div></div>
+    </section>
+  </main>
+
+  <!-- Bazy danych (pliki w folderze "dane") -->
+  <script src="dane/czesci.js"></script>
+  <script src="dane/dostawcy.js"></script>
+  <script src="dane/klienci.js"></script>
+  <script src="dane/zamowienia.js"></script>
+  <!-- Generator kodów QR -->
+  <script src="biblioteki/qrcode.js"></script>
+  <!-- Logika aplikacji -->
+  <script src="app.js"></script>
+</body>
+</html>
